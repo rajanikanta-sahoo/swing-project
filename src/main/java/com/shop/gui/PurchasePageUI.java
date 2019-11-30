@@ -19,6 +19,7 @@ import ca.odell.glazedlists.GlazedLists;
 import ca.odell.glazedlists.swing.AutoCompleteSupport;
 import com.shop.domain.Product;
 import com.shop.utils.ProductRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +29,7 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
 
     EventList<ProductCompany> itemEventList;
     EventList<Product> prodEventList;
+    DefaultTableModel model;
 
     /**
      * Creates new form PurchasePageUI
@@ -71,10 +73,10 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
         compAddBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        pTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -129,8 +131,13 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("ADD");
+        addButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addButton.setText("ADD");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout catPanLayout = new javax.swing.GroupLayout(catPan);
         catPan.setLayout(catPanLayout);
@@ -154,7 +161,7 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(addButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         catPanLayout.setVerticalGroup(
@@ -176,23 +183,23 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
                     .addComponent(prodLbl)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        pTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "SL.No.", "Company Name", "Product Name", "MRP", "Qnt.", "Price"
+                "SL.No.", "Company Name", "Product Name", "MRP", "Qnt.", "Price", "product"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true
+                false, false, false, false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -203,7 +210,7 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(pTable);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("TOTAL PRICE : ");
@@ -347,13 +354,18 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cpmpComboItemStateChanged
 
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_addButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JPanel catPan;
     private javax.swing.JButton compAddBtn;
     private javax.swing.JLabel compLbl;
     private javax.swing.JComboBox<String> cpmpCombo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -362,9 +374,9 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPain;
+    private javax.swing.JTable pTable;
     private javax.swing.JButton prodAddBtn;
     private javax.swing.JComboBox<String> prodCombo;
     private javax.swing.JLabel prodLbl;

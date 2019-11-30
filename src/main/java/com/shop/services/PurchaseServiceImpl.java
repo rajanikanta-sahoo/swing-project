@@ -41,4 +41,16 @@ public class PurchaseServiceImpl implements PurchaseService {
         return productRepository.findByProductCompanyId(company);
     }
 
+    @Override
+    public boolean saveProduct(ProductCompany com, String prodName, int qnt, float mrp) throws Exception {
+        Product produdt = new Product();
+        produdt.setMrp(mrp);
+        produdt.setName(prodName);
+        produdt.setProductCompanyId(com);
+        produdt.setQuntity(qnt);
+        productRepository.save(produdt);
+         
+        return true;
+    }
+
 }

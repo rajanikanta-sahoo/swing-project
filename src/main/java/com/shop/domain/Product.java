@@ -26,13 +26,13 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "product_company_id")
-    private Product productCompanyId;
+    private ProductCompany productCompanyId;
 
     @Column
     private String name;
 
     @Column
-    private String quntity;
+    private int quntity;
 
     @Column
     private float mrp;
@@ -45,14 +45,15 @@ public class Product {
         this.id = id;
     }
 
-    public Product getProductCompanyId() {
+    public ProductCompany getProductCompanyId() {
         return productCompanyId;
     }
 
-    public void setProductCompanyId(Product productCompanyId) {
+    public void setProductCompanyId(ProductCompany productCompanyId) {
         this.productCompanyId = productCompanyId;
     }
 
+    
     public String getName() {
         return name;
     }
@@ -61,13 +62,15 @@ public class Product {
         this.name = name;
     }
 
-    public String getQuntity() {
+    public int getQuntity() {
         return quntity;
     }
 
-    public void setQuntity(String quntity) {
+    public void setQuntity(int quntity) {
         this.quntity = quntity;
     }
+
+    
 
     public float getMrp() {
         return mrp;
