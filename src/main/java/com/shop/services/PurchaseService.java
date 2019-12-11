@@ -12,6 +12,6 @@ public interface PurchaseService {
     
     public List<Product> getComboProducts(ProductCompany company) throws Exception;
     
-    public boolean saveProduct(ProductCompany com,String prod,int qnt, float mrp) throws Exception;
+    public boolean saveProduct(ProductCompany com,String prod,String size, float mrp) throws Exception;
     
 }

@@ -40,17 +40,17 @@ public class ProductRenderer extends JPanel implements ListCellRenderer {
         for (int x = 0; x < lbl.length; x++) {
             lbl[x] = new JLabel();
             lbl[x].setOpaque(true);
-            lbl[x].setFont(new Font("TAHOMA", Font.BOLD, 14));
+            lbl[x].setFont(new Font("ARIAL", Font.BOLD, 14));
             lbl[x].setHorizontalAlignment(JLabel.LEFT);
             if (x == 0) {
-                lbl[x].setPreferredSize(new Dimension(200, 14));
+                lbl[x].setPreferredSize(new Dimension(150, 14));
             }
             if (x == 1) {
-                lbl[x].setPreferredSize(new Dimension(200, 14));
+                lbl[x].setPreferredSize(new Dimension(150, 14));
             }
-            if (x == 2) {
-                lbl[x].setPreferredSize(new Dimension(200, 14));
-            }
+//            if (x == 2) {
+//                lbl[x].setPreferredSize(new Dimension(200, 14));
+//            }
             add(lbl[x]);
         }
     }
@@ -64,19 +64,19 @@ public class ProductRenderer extends JPanel implements ListCellRenderer {
 
             // item =   em.merge(item);
             lbl[0].setText(item.getName());
-            lbl[1].setText(item.getQuntity());
-            lbl[2].setText("(" + item.getQuntity() + ")");
+//            lbl[1].setText(item.getSize());
+            lbl[1].setText("(" + item.getSize() + ")");
 
             if (isSelected) {
                 lbl[0].setBackground(Color.LIGHT_GRAY);
                 lbl[1].setBackground(Color.LIGHT_GRAY);
-                lbl[2].setBackground(Color.LIGHT_GRAY);
+//                lbl[2].setBackground(Color.LIGHT_GRAY);
 
             } else {
 
-                lbl[0].setBackground(new Color(238, 238, 238));
+                lbl[0].setBackground(new Color(200, 238, 238));
                 lbl[1].setBackground(new Color(200, 238, 238));
-                lbl[2].setBackground(new Color(200, 238, 238));
+//                lbl[2].setBackground(new Color(200, 238, 238));
             }
         } catch (Exception e) {
             e.printStackTrace();

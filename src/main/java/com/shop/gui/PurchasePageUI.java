@@ -49,6 +49,16 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
             }
 
             cpmpCombo.setRenderer(new CompanyRenderer(company));
+            cpmpCombo.setSelectedIndex(0);
+            ProductCompany company1 = (ProductCompany) cpmpCombo.getSelectedItem();
+            List<Product> products = purchaseService.getComboProducts(company1);
+            if (products != null) {
+                prodEventList = GlazedLists.eventList(products);
+                AutoCompleteSupport.install(prodCombo, prodEventList);
+            }
+
+            prodCombo.setRenderer(new ProductRenderer(products));
+            
         } catch (Exception e) {
             new ExceptionUI(new javax.swing.JFrame(), true, e.toString());
         }
@@ -103,7 +113,6 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
         prodLbl.setText("Product: ");
 
         prodCombo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        prodCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         prodCombo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 prodComboMouseClicked(evt);
@@ -167,15 +176,11 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
         catPanLayout.setVerticalGroup(
             catPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(catPanLayout.createSequentialGroup()
-                .addGroup(catPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(catPanLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(catPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cpmpCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(compLbl)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, catPanLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(compAddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
+                .addGroup(catPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cpmpCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(compLbl)
+                    .addComponent(compAddBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(catPanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prodCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,9 +322,18 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
 
     private void prodAddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prodAddBtnActionPerformed
         // TODO add your handling code here:
-        ProductAddUI prodDialog = new ProductAddUI(new JFrame(), true);
-        prodDialog.setLocationRelativeTo(null);
-        prodDialog.setVisible(true);
+        try {
+            ProductAddUI prodDialog = new ProductAddUI(new JFrame(), true);
+            prodDialog.setLocationRelativeTo(null);
+            prodDialog.setVisible(true);
+            ProductCompany company = (ProductCompany) cpmpCombo.getSelectedItem();
+            List<Product> products = purchaseService.getComboProducts(company);
+            System.out.println("data--->" + products);
+//            prodEventList = GlazedLists.eventList(products);
+            prodCombo.setRenderer(new ProductRenderer(products));
+        } catch (Exception e) {
+            new ExceptionUI(new javax.swing.JFrame(), true, e.toString());
+        }
     }//GEN-LAST:event_prodAddBtnActionPerformed
 
     private void prodComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prodComboMouseClicked
@@ -328,7 +342,7 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-
+        this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cpmpComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cpmpComboMouseClicked
@@ -339,26 +353,28 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
 
     private void cpmpComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cpmpComboItemStateChanged
         // TODO add your handling code here:
+        setProductCombo();
+    }//GEN-LAST:event_cpmpComboItemStateChanged
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+        int sl = pTable.getRowCount();
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    void setProductCombo() {
         ProductCompany company = (ProductCompany) cpmpCombo.getSelectedItem();
         System.out.println(company);
         try {
             List<Product> products = purchaseService.getComboProducts(company);
             if (products != null) {
-                prodEventList = GlazedLists.eventList(products);
-                AutoCompleteSupport.install(prodCombo, prodEventList);
+                prodCombo.setRenderer(new ProductRenderer(products));
             }
 
-            prodCombo.setRenderer(new ProductRenderer(products));
+            
         } catch (Exception e) {
             new ExceptionUI(new javax.swing.JFrame(), true, e.toString());
         }
-    }//GEN-LAST:event_cpmpComboItemStateChanged
-
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_addButtonActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;

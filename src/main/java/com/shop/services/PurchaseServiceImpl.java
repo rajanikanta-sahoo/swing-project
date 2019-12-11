@@ -42,12 +42,12 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public boolean saveProduct(ProductCompany com, String prodName, int qnt, float mrp) throws Exception {
+    public boolean saveProduct(ProductCompany com, String prodName, String size, float mrp) throws Exception {
         Product produdt = new Product();
         produdt.setMrp(mrp);
         produdt.setName(prodName);
         produdt.setProductCompanyId(com);
-        produdt.setQuntity(qnt);
+        produdt.setSize(size);
         productRepository.save(produdt);
          
         return true;

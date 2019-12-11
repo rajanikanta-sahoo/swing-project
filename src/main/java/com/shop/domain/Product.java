@@ -32,10 +32,15 @@ public class Product {
     private String name;
 
     @Column
-    private int quntity;
+    private String size;
 
     @Column
     private float mrp;
+
+    @Override
+    public String toString() {
+        return  name + '('+size+")";
+    }
 
     public Integer getId() {
         return id;
@@ -62,15 +67,14 @@ public class Product {
         this.name = name;
     }
 
-    public int getQuntity() {
-        return quntity;
+    public String getSize() {
+        return size;
     }
 
-    public void setQuntity(int quntity) {
-        this.quntity = quntity;
+    public void setSize(String size) {
+        this.size = size;
     }
 
-    
 
     public float getMrp() {
         return mrp;
