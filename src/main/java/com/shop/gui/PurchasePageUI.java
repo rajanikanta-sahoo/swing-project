@@ -58,6 +58,7 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
             }
 
             prodCombo.setRenderer(new ProductRenderer(products));
+            model = (DefaultTableModel) pTable.getModel();
             
         } catch (Exception e) {
             new ExceptionUI(new javax.swing.JFrame(), true, e.toString());
@@ -192,6 +193,7 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
+        pTable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         pTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -265,9 +267,11 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -359,6 +363,19 @@ public class PurchasePageUI extends javax.swing.JInternalFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         int sl = pTable.getRowCount();
+        String cname="",pname="";
+        float mrp=0,price=0;
+        int qnt=0;
+        cname = ((ProductCompany)cpmpCombo.getSelectedItem()).getName();
+        pname = ((Product)prodCombo.getSelectedItem()).getName();
+        qnt = Integer.parseInt(jTextField1.getText());
+        mrp = ((Product)prodCombo.getSelectedItem()).getMrp();
+        price = mrp * qnt;
+        model.addRow(new Object[]{(sl+1),cname,pname,mrp,qnt,price,(Product)prodCombo.getSelectedItem()});
+        pTable.setModel(model);
+        model.fireTableDataChanged();
+        
+        
     }//GEN-LAST:event_addButtonActionPerformed
 
     void setProductCombo() {
